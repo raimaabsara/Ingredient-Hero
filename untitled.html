@@ -1,0 +1,76 @@
+
+<html
+<head>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<h1 style = "font-size:6vw; text-position:60%; color: #617342; font-family:'helvetica'; margin-left:24%;"> Ingredient Hero </h1>
+
+
+</head> 
+<body>
+<style>
+body {
+  background-image: url('https://cdn.discordapp.com/attachments/1076193653833343077/1076721310941585479/output-onlinepngtools.png');
+  background-color: #d6e9b6;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+   background-size: 8% 14%;
+   background-position: top 4% right 23%;
+}
+</style>  
+<label for="Ingredient Hero"> </label>
+<label for="Ingredients"> </label>
+
+<h2 style="font-size:3vw; color: #FFF; font-family:'helvetica'; font-weight: bold; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5)"";>Enter a list of ingredients below, separated by commas:</h2>
+
+ 
+
+<input type="text" id="ingredients" name="ingredients">
+<button type="submit" id="submit" onclick="DisplayLoading()">Generate Recipe</button>
+<div id="myDIV">
+  Recipe cooking...
+</div>
+<div id="result" style="white-space: pre-wrap;"></div>
+
+
+<script>
+function main() {
+  let button = document.querySelector('#submit');
+  let inputForm = document.querySelector('#ingredients');
+  let resultSection = document.querySelector('#result');
+  HideLoading();
+  console.log(button)
+  button.addEventListener('click', function(e) {
+    e.preventDefault();
+    // use fetch to query our openAI endpoint
+    fetch('https://raimaabsara.autocode.dev/watermelon-lover@dev/', {
+      method: 'POST',
+      body: JSON.stringify({ingredients: inputForm.value})
+    })
+    .then((response) => response.json())
+    .then((result) => {
+      console.log(result)
+      resultSection.innerHTML = result;
+    });
+  });
+  
+}
+document.addEventListener('DOMContentLoaded', main);
+
+function HideLoading() {
+  var x = document.getElementById("myDIV");
+  x.style.display = "none";
+}
+
+function DisplayLoading() {
+  var x = document.getElementById("myDIV");
+  x.style.display = "block";
+  // x.style.display = "none";
+}
+
+
+
+</script>
+</html>
+</body>
+
+
